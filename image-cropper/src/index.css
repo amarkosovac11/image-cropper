@@ -2,11 +2,53 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  
 }
 
 body {
   padding: 40 px;
-  background-color: #ffffff;
+  background-color: #76cde0ff;
   font-family: "Franklin Gothic Medium";
 }
 
+.btn1 {
+  display: block;
+  margin: 0 auto;
+  margin-top: 100px;
+  width: 100px;
+  height: 50px;
+}
+
+
+.img-after-crop {
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+
+
+.action-btns {
+  margin-top: 20px;
+  display:grid;
+  column-gap: 100px;
+  row-gap: 10px;
+  justify-content: center;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.btns-after-crop {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  gap: 10px;
+}

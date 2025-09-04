@@ -23,7 +23,6 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onImageSelected }) => {
 
   return (
     <div>
-      {/* Hidden file input element */}
       <input
         type="file"
         accept="image/*"
@@ -32,10 +31,8 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onImageSelected }) => {
         style={{ display: "none" }}
       />
 
-      {/* Button to trigger file input click */}
-      <button className="btn" onClick={onChooseImage}>
-        Choose Image
-      </button>
+
+      <button className="btn1" onClick={onChooseImage}> Choose Image </button>
     </div>
   );
 };
