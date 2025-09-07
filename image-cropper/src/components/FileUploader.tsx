@@ -23,6 +23,8 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onImageSelected }) => {
 
   return (
     <div>
+
+        <h1>IMAGE CROPPER</h1>
       <input
         type="file"
         accept="image/*"

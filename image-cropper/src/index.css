@@ -6,23 +6,82 @@
 }
 
 body {
-  padding: 40 px;
-  background-color: #76cde0ff;
+
+  background: linear-gradient(135deg, #F9FAFB 0%, #F3E8FF 100%);
   font-family: "Franklin Gothic Medium";
 }
+
+h1 {
+  text-align: center;
+  margin-top: 140px;
+  font-size: 4rem; 
+  font-family: "Poppins", "Roboto", sans-serif;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  line-height: 1.2;
+  position: relative;
+
+
+  background: linear-gradient(90deg, #9333ea, #a855f7, #c084fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+
+  text-shadow: 0 4px 10px rgba(168, 85, 247, 0.3),
+               0 2px 6px rgba(0, 0, 0, 0.2);
+
+  animation: fadeUp 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+
+h1::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #9333ea, #a855f7);
+  margin: 16px auto 0;
+  box-shadow: 0 2px 6px rgba(168, 85, 247, 0.5);
+}
+
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
 
 .btn1 {
   display: block;
   margin: 0 auto;
   margin-top: 100px;
-  width: 100px;
-  height: 50px;
+  
+
+  
+    background-color: purple;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: monospace;
+    color: white;
+    padding: 20px;
+
+    text-align: center;
+    cursor: pointer;
 }
 
 
+
 .img-after-crop {
-  width: 300px;
-  height: 300px;
+  width: 500px;
+  height: 450px;
   object-fit: contain;
   display: block;
   margin: 0 auto;
@@ -37,13 +96,48 @@ body {
   column-gap: 100px;
   row-gap: 10px;
   justify-content: center;
+
+  
 }
+
 
 .btn-container {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 12px;
+  
   gap: 10px;
+
+}
+
+.cropper-container {
+  margin-top: 50px;
+}
+
+.btnCancel, .btnDone {
+  background-color: purple;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  font-family: monospace;
+  color: white;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  align-items: center;
+  margin-top: 450px;
+}
+
+.btnCNI, .btnDownload, .btnCancel2 {
+  background-color: purple;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 18px;
+  font-family: monospace;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .btns-after-crop {
@@ -51,4 +145,46 @@ body {
   justify-content: center;
   margin-top: 10px;
   gap: 10px;
+}
+
+
+/*Aspect Ratio Buttons*/
+.aspect-ratios {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.aspect-ratios input[type="radio"] {
+  display: none;
+}
+
+
+.aspect-ratios label {
+  background: #fff;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #374151;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.aspect-ratios label:hover {
+  border-color: purple;   
+  color: purple;
+  box-shadow: 0 2px 6px rgba(168, 85, 247, 0.2);
+}
+
+
+.aspect-ratios input[type="radio"]:checked + label {
+  background: purple;  
+  color: #fff;
+  border-color: Purple;
+  box-shadow: 0 3px 8px rgba(168, 85, 247, 0.3);
 }

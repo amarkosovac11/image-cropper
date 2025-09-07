@@ -22,7 +22,7 @@ const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
 
 
 
-    return <div>
+    return <div className="cropper-container">
 
         <div className="cropper">
             <Cropper
@@ -36,9 +36,14 @@ const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
                 style={{
                     containerStyle: {
                         top: '20%',
-                        width: '100%',
+
+                        width: '500px',
                         height: '400px',
-                        backgroundColor: '#76cde0ff',
+                        border: '2px solid purple',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                        justifyContent: 'center',
+                        
                     },
                 }}
             />
@@ -46,22 +51,36 @@ const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
 
 
         <div className="action-btns">
-            <div className="aspcet-ratios" onChange={onAspectRatioChange}>
-                <input type="radio" value={1 / 1} name="ratio" /> 1:1
-                <input type="radio" value={5 / 4} name="ratio" /> 5:4
-                <input type="radio" value={4 / 3} name="ratio" /> 4:3
-                <input type="radio" value={3 / 2} name="ratio" /> 3:2
-                <input type="radio" value={5 / 3} name="ratio" /> 5:3
-                <input type="radio" value={16 / 9} name="ratio" /> 16:9
-                <input type="radio" value={3 / 1} name="ratio" /> 3:1
+            <div className="aspect-ratios" onChange={onAspectRatioChange}>
+                <label>
+                    <input type="radio" value={1 / 1} name="ratio" /> 1:1
+                </label>
+                <label>
+                    <input type="radio" value={5 / 4} name="ratio" /> 5:4
+                </label>
+                <label>
+                    <input type="radio" value={4 / 3} name="ratio" /> 4:3
+                </label>
+                <label>
+                    <input type="radio" value={3 / 2} name="ratio" /> 3:2
+                </label>
+                <label>
+                    <input type="radio" value={5 / 3} name="ratio" /> 5:3
+                </label>
+                <label>
+                    <input type="radio" value={16 / 9} name="ratio" /> 16:9
+                </label>
+                <label>
+                    <input type="radio" value={3 / 1} name="ratio" /> 3:1
+                </label>
             </div>
 
 
             <div className="btn-container">
 
-                <button className="btn btn-outline" onClick={onCropCancel}> Cancel </button>
+                <button className="btnCancel" onClick={onCropCancel}> Cancel </button>
 
-                <button className='btn'
+                <button className='btnDone'
                     onClick={() => {
 
                         onCropDone(croppedArea);

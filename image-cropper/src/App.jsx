@@ -59,7 +59,11 @@ const App = () => {
     
   
   return (
+
+    
     <div className="container">
+
+    
       {currentPage === "choose-img" ? (
         <FileUploader onImageSelected={onImageSelected} />
       ) : currentPage === "crop-img" ? (
@@ -81,8 +85,8 @@ const App = () => {
             onClick={() => {
               setCurrentPage("crop-img");
             }}
-            className="btn"
-          > Cancel </button>
+            className="btnCancel2"
+          > Cancel </button> 
 
 
           <button
@@ -90,10 +94,10 @@ const App = () => {
               setCurrentPage("choose-img");
               setImage("");
             }}
-            className="btn"
+            className="btnCNI"
           > Choose New Image </button>
 
-          <button
+          <button className='btnDownload'
           onClick ={() => {
             const link = document.createElement('a');
             link.href = imgAfterCrop;
