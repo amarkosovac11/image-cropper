@@ -136,7 +136,7 @@ h1::after {
   margin-top: 450px;
 }
 
-.btnCNI, .btnDownload, .btnCancel2 {
+.btnCNI, .btnDownload, .btnCancel2, .btnGenerate {
   background-color: purple;
   border-radius: 5px;
   font-weight: bold;

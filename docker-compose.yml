@@ -1,0 +1,16 @@
+
+
+services:
+  backend:
+    build: ./backend
+    container_name: image-cropper-backend
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build: ./image-cropper
+    container_name: image-cropper-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend

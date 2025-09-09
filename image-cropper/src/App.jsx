@@ -4,55 +4,52 @@ import FileUploader from "./components/FileUploader";
 import ImageCropper from "./components/ImageCropper";
 
 const App = () => {
-  const [image, setImage] = useState(null); 
+  const [image, setImage] = useState(null);
   const [currentPage, setCurrentPage] = useState("choose-img");
-  const [previewUrl, setPreviewUrl] = useState(""); 
-  const [finalUrl, setFinalUrl] = useState(""); 
-  const [lastCropArea, setLastCropArea] = useState(null); 
+  const [previewUrl, setPreviewUrl] = useState("");
+  const [finalUrl, setFinalUrl] = useState("");
+  const [lastCropArea, setLastCropArea] = useState(null);
 
-  
   const onImageSelected = (selectedImage) => {
-    setImage(selectedImage); 
+    setImage(selectedImage);
     setCurrentPage("crop-img");
   };
 
-  
   const sendToBackend = async (imgCroppedArea, endpoint) => {
     const formData = new FormData();
-    formData.append("image", image); 
+    formData.append("image", image);
     formData.append("x", imgCroppedArea.x);
     formData.append("y", imgCroppedArea.y);
     formData.append("width", imgCroppedArea.width);
     formData.append("height", imgCroppedArea.height);
 
-    const response = await fetch(`http://localhost:5000/api/image/${endpoint}`, {
-      method: "POST",
-      body: formData,
-    });
+   const response = await fetch(`http://localhost:5000/api/image/${endpoint}`, {
+  method: "POST",
+  body: formData,
+});
 
     if (!response.ok) {
-      throw new Error("Backend error: " + response.statusText);
+      const text = await response.text();
+      throw new Error("Backend error: " + text);
     }
 
     const blob = await response.blob();
     return URL.createObjectURL(blob);
   };
 
-
   const onCropDone = async (imgCroppedArea) => {
     try {
-      setLastCropArea(imgCroppedArea); 
+      setLastCropArea(imgCroppedArea);
       const preview = await sendToBackend(imgCroppedArea, "preview");
       setPreviewUrl(preview);
-      setFinalUrl(""); 
+      setFinalUrl("");
       setCurrentPage("img-cropped");
     } catch (err) {
       console.error(err);
-      alert("Error while previewing image");
+      alert("Error while previewing image: " + err.message);
     }
   };
 
-  
   const onCropCancel = () => {
     setCurrentPage("choose-img");
     setImage(null);
@@ -67,7 +64,7 @@ const App = () => {
         <FileUploader onImageSelected={onImageSelected} />
       ) : currentPage === "crop-img" ? (
         <ImageCropper
-          image={URL.createObjectURL(image)} 
+          image={URL.createObjectURL(image)}
           onCropDone={onCropDone}
           onCropCancel={onCropCancel}
         />
@@ -109,7 +106,6 @@ const App = () => {
               Choose New Image
             </button>
 
-           
             {previewUrl && !finalUrl && (
               <button
                 className="btnGenerate"
@@ -119,7 +115,7 @@ const App = () => {
                     setFinalUrl(final);
                   } catch (err) {
                     console.error(err);
-                    alert("Error while generating final image");
+                    alert("Error while generating final image: " + err.message);
                   }
                 }}
               >
@@ -127,7 +123,6 @@ const App = () => {
               </button>
             )}
 
-            
             {finalUrl && (
               <button
                 className="btnDownload"

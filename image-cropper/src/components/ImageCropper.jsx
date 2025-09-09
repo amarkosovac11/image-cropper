@@ -12,7 +12,7 @@ const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
   };
 
   const onAspectRatioChange = (event) => {
-    setAspectRatio(parseFloat(event.target.value)); 
+    setAspectRatio(parseFloat(event.target.value));
   };
 
   return (
@@ -74,7 +74,12 @@ const ImageCropper = ({ image, onCropDone, onCropCancel }) => {
             className="btnDone"
             onClick={() => {
               if (croppedArea) {
-                onCropDone(croppedArea); 
+                onCropDone({
+                  x: Math.round(croppedArea.x),
+                  y: Math.round(croppedArea.y),
+                  width: Math.round(croppedArea.width),
+                  height: Math.round(croppedArea.height),
+                });
               } else {
                 alert("Please crop an area first");
               }

@@ -6,40 +6,40 @@ const cors = require("cors");
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
 
+app.use(cors());
 
-
-app.use(cors()); 
-
-
-
-
-
+// Helper: validate crop params
+function validateCrop({ x, y, width, height }) {
+  const vals = [x, y, width, height].map((v) => parseInt(v));
+  if (vals.some((v) => isNaN(v) || v < 1)) {
+    return null;
+  }
+  return {
+    left: vals[0],
+    top: vals[1],
+    width: vals[2],
+    height: vals[3],
+  };
+}
 
 app.post("/api/image/preview", upload.single("image"), async (req, res) => {
   try {
     console.log("Preview req.body:", req.body);
-    console.log("Preview req.file:", req.file ? "File received" : "No file!");
 
-    const { x, y, width, height } = req.body;
-    const imageBuffer = req.file.buffer;
+    if (!req.file) {
+      return res.status(400).send("No image uploaded");
+    }
 
-    const cropped = await sharp(imageBuffer)
-      .extract({
-        left: parseInt(x),
-        top: parseInt(y),
-        width: parseInt(width),
-        height: parseInt(height),
-      })
-      .resize({ width: 400})
+    const cropBox = validateCrop(req.body);
+    if (!cropBox) {
+      return res.status(400).send("Invalid crop parameters");
+    }
+
+    const cropped = await sharp(req.file.buffer)
+      .extract(cropBox)
+      .resize({ width: 400 }) // scaled down preview
       .png()
       .toBuffer();
-
-
-  
-
-
-
-
 
     res.set("Content-Type", "image/png");
     res.send(cropped);
@@ -49,22 +49,21 @@ app.post("/api/image/preview", upload.single("image"), async (req, res) => {
   }
 });
 
-
 app.post("/api/image/generate", upload.single("image"), async (req, res) => {
   try {
     console.log("Generate req.body:", req.body);
-    console.log("Generate req.file:", req.file ? "File received" : "No file!");
 
-    const { x, y, width, height } = req.body;
-    const imageBuffer = req.file.buffer;
+    if (!req.file) {
+      return res.status(400).send("No image uploaded");
+    }
 
-    const cropped = await sharp(imageBuffer)
-      .extract({
-        left: parseInt(x),
-        top: parseInt(y),
-        width: parseInt(width),
-        height: parseInt(height),
-      })
+    const cropBox = validateCrop(req.body);
+    if (!cropBox) {
+      return res.status(400).send("Invalid crop parameters");
+    }
+
+    const cropped = await sharp(req.file.buffer)
+      .extract(cropBox)
       .png()
       .toBuffer();
 
