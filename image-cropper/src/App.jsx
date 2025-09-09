@@ -10,6 +10,8 @@ const App = () => {
   const [finalUrl, setFinalUrl] = useState("");
   const [lastCropArea, setLastCropArea] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
   const onImageSelected = (selectedImage) => {
     setImage(selectedImage);
     setCurrentPage("crop-img");
@@ -23,10 +25,10 @@ const App = () => {
     formData.append("width", imgCroppedArea.width);
     formData.append("height", imgCroppedArea.height);
 
-   const response = await fetch(`http://localhost:5000/api/image/${endpoint}`, {
-  method: "POST",
-  body: formData,
-});
+    const response = await fetch(`${API_URL}/api/image/${endpoint}`, {
+      method: "POST",
+      body: formData,
+    });
 
     if (!response.ok) {
       const text = await response.text();
@@ -39,6 +41,11 @@ const App = () => {
 
   const onCropDone = async (imgCroppedArea) => {
     try {
+      if (!imgCroppedArea || imgCroppedArea.width < 1 || imgCroppedArea.height < 1) {
+        alert("Please select a crop area before previewing.");
+        return;
+      }
+
       setLastCropArea(imgCroppedArea);
       const preview = await sendToBackend(imgCroppedArea, "preview");
       setPreviewUrl(preview);
@@ -50,6 +57,7 @@ const App = () => {
     }
   };
 
+
   const onCropCancel = () => {
     setCurrentPage("choose-img");
     setImage(null);
@@ -58,8 +66,12 @@ const App = () => {
     setLastCropArea(null);
   };
 
+
+
   return (
     <div className="container">
+
+
       {currentPage === "choose-img" ? (
         <FileUploader onImageSelected={onImageSelected} />
       ) : currentPage === "crop-img" ? (
