@@ -49,6 +49,7 @@ Frontend is built with **React (Vite)**, backend with **Node + Mutter + Express 
 6. OPTION 2 <br>
    (Must have express multer sharp cors) <br>
    npm install express multer sharp cors <br>
+   Return to step 3 and 4
    
 7. http://localhost:3000 <br>
 
@@ -68,10 +69,30 @@ Frontend is built with **React (Vite)**, backend with **Node + Mutter + Express 
 
 6) Click Download Final to save it.
 
+---
 
- 
+## 🖼️ Screenshots
+<img width="1822" height="877" alt="image" src="https://github.com/user-attachments/assets/eda1b844-121d-4670-ab5e-35221460a6da" />
+<br>
 
 ---
+
+<img width="1812" height="863" alt="image" src="https://github.com/user-attachments/assets/a95c296b-a364-4658-b2bf-c44a5e0ea683" />
+<br>
+
+---
+
+<img width="1812" height="863" alt="image" src="https://github.com/user-attachments/assets/5d893075-fe17-469a-8371-f5637c70a7bf" />
+<br>
+
+---
+
+<img width="1793" height="855" alt="image" src="https://github.com/user-attachments/assets/26b697bc-98f6-4ff3-9ab4-135a10e64075" />
+<br>
+
+---
+
+
 
  
 
