@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useRef } from 'react';
+import React, { ChangeEvent, useRef } from "react";
 
 interface FileUploaderProps {
-  onImageSelected: (image: string | ArrayBuffer | null) => void;
+  onImageSelected: (image: File) => void; 
 }
 
 const FileUploader: React.FC<FileUploaderProps> = ({ onImageSelected }) => {
@@ -9,11 +9,8 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onImageSelected }) => {
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files.length > 0) {
-      const reader = new FileReader();
-      reader.readAsDataURL(event.target.files[0]);
-      reader.onload = function () {
-        onImageSelected(reader.result);
-      };
+      const file = event.target.files[0];
+      onImageSelected(file); 
     }
   };
 
@@ -23,8 +20,7 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onImageSelected }) => {
 
   return (
     <div>
-
-        <h1>IMAGE CROPPER</h1>
+      <h1>IMAGE CROPPER</h1>
       <input
         type="file"
         accept="image/*"
@@ -32,9 +28,9 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onImageSelected }) => {
         onChange={handleOnChange}
         style={{ display: "none" }}
       />
-
-
-      <button className="btn1" onClick={onChooseImage}> Choose Image </button>
+      <button className="btn1" onClick={onChooseImage}>
+        Choose Image
+      </button>
     </div>
   );
 };
